@@ -44,6 +44,9 @@
                                         echo "<th>#</th>";
                                         echo "<th>Usuario</th>";
                                         echo "<th>Correo</th>";
+                                        echo "<th>Nombre</th>";
+                                        echo "<th>Primer Apellido</th>";
+                                        echo "<th>Segundo Apellido</th>";
                                         echo "<th>Celular</th>";
                                         echo "<th>Acciones</th>";
                                     echo "</tr>";
@@ -54,6 +57,9 @@
                                         echo "<td>" . $row['id'] . "</td>";
                                         echo "<td>" . $row['username'] . "</td>";
                                         echo "<td>" . $row['correo'] . "</td>";
+                                        echo "<td>" . $row['nombre'] . "</td>";
+                                        echo "<td>" . $row['pApellido'] . "</td>";
+                                        echo "<td>" . $row['sApellido'] . "</td>";
                                         echo "<td>" . $row['celular'] . "</td>";
                                         echo "<td>";
                                             echo '<a href="read.php?id='. $row['id'] .'" class="mr-3" title="Ver información" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';

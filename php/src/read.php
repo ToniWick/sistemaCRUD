@@ -19,6 +19,9 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 $username = $row["username"];
                 $correo = $row["correo"];
                 $celular = $row["celular"];
+                $nombre = $row["nombre"];
+                $pApellido = $row["pApellido"];
+                $sApellido = $row["sApellido"];
             } else{
                 header("location: error.php");
                 exit();
@@ -58,7 +61,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">Ver información</h1>
                     <div class="form-group">
-                        <label>Nombre</label>
+                        <label>Usuario</label>
                         <p><b><?php echo $row["username"]; ?></b></p>
                     </div>
                     <div class="form-group">
@@ -66,7 +69,19 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                         <p><b><?php echo $row["correo"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Salario</label>
+                        <label>Nombre</label>
+                        <p><b><?php echo $row["nombre"]; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Primer Apellido</label>
+                        <p><b><?php echo $row["pApellido"]; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Segundo Apellido</label>
+                        <p><b><?php echo $row["sApellido"]; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Celular</label>
                         <p><b><?php echo $row["celular"]; ?></b></p>
                     </div>
                     <p><a href="index.php" class="btn btn-primary">Regresar</a></p>

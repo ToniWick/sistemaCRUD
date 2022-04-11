@@ -1,17 +1,19 @@
 <?php
 require_once "config.php";
  
-$username = $correo = $celular = "";
+$username = $correo = $celular = "";    #Datos del usuario
+$nombre = $pApellido = $sApellido = $nacimiento = "";   #Datos personales
+
+#Variables de errores
 $username_err = $correo_err = $celular_err = "";
+$nombre_err = $pApellido_err = $sApellido_err = $nacimiento_err = "";
  
 if(isset($_POST["id"]) && !empty($_POST["id"])){
     $id = $_POST["id"];
-    
+    #Usuario
     $input_username = trim($_POST["username"]);
     if(empty($input_username)){
-        $username_err = "Ingresa un nombre valido";
-    } elseif(!filter_var($input_username, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-        $username_err = "Ingresa un nombre valido";
+        $username_err = "Ingresar un usuario";
     } else{
         $username = $input_username;
     }
@@ -22,7 +24,34 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     } else{
         $correo = $input_correo;
     }
-    
+    #Nombre
+    $input_nombre = trim($_POST["nombre"]);
+    if(empty($input_nombre)){
+        $username_err = "Ingresar un nombre";
+    } elseif(!filter_var($input_nombre, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        $username_err = "Ingresar un nombre valido";
+    } else{
+        $nombre = $input_nombre;
+    }
+    #Primer Apellido
+    $input_pApellido = trim($_POST["pApellido"]);
+    if(empty($input_pApellido)){
+        $pApellido_err = "Ingresar un Apellido";
+    } elseif(!filter_var($input_pApellido, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        $pApellido_err = "Ingresar un Apellido Valido";
+    } else{
+        $pApellido = $input_pApellido;
+    }
+    #Segundo Apellido
+    $input_sApellido = trim($_POST["sApellido"]);
+    if(empty($input_sApellido)){
+        $sApellido_err = "Ingresar un Apellido";
+    } elseif(!filter_var($input_sApellido, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        $sApellido_err = "Ingresar un Apellido Valido";
+    } else{
+        $sApellido = $input_sApellido;
+    }
+    #Celular
     $input_celular = trim($_POST["celular"]);
     if(empty($input_celular)){
         $celular_err = "Ingresa un salario valido";     
@@ -32,15 +61,18 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $celular = $input_celular;
     }
     
-    if(empty($username_err) && empty($correo_err) && empty($celular_err)){
-        $sql = "UPDATE cliente SET username=?, correo=?, celular=? WHERE id=?";
+    if(empty($username_err) && empty($correo_err) && empty($celular_err) && empty($nombre_err) && empty($pApellido_err) && empty($sApellido_err)){
+        $sql = "UPDATE cliente SET username=?, correo=?, celular=? , nombre=?, pApellido=?, sApellido=? WHERE id=?";
          
         if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "sssi", $param_username, $param_correo, $param_celular, $param_id);
+            mysqli_stmt_bind_param($stmt, "ssssssi", $param_username, $param_correo, $param_celular, $param_nombre, $param_pApellido, $param_sApellido, $param_id);
             
             $param_username = $username;
             $param_correo = $correo;
             $param_celular = $celular;
+            $param_nombre = $nombre;
+            $param_pApellido = $pApellido;
+            $param_sApellido = $sApellido;
             $param_id = $id;
             
             if(mysqli_stmt_execute($stmt)){
@@ -75,6 +107,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     $username = $row["username"];
                     $correo = $row["correo"];
                     $celular = $row["celular"];
+                    $nombre = $row["nombre"];
+                    $pApellido = $row["pApellido"];
+                    $sApellido = $row["sApellido"];
                 } else{
                     header("location: error.php");
                     exit();
@@ -117,7 +152,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     <p>Edita la información de tu empleado</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                         <div class="form-group">
-                            <label>Nombre</label>
+                            <label>Usuario</label>
                             <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'Invalido' : ''; ?>" value="<?php echo $username; ?>">
                             <span class="Invalido"><?php echo $username_err;?></span>
                         </div>
@@ -127,7 +162,22 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                             <span class="Invalido"><?php echo $correo_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Salario</label>
+                            <label>Nombre</label>
+                            <textarea name="nombre" class="form-control <?php echo (!empty($nombre_err)) ? 'Invalido' : ''; ?>"><?php echo $nombre; ?></textarea>
+                            <span class="Invalido"><?php echo $nombre_err;?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Primer apellido</label>
+                            <textarea name="pApellido" class="form-control <?php echo (!empty($pApellido_err)) ? 'Invalido' : ''; ?>"><?php echo $pApellido; ?></textarea>
+                            <span class="Invalido"><?php echo $pApellido_err;?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Segundo Apellido</label>
+                            <textarea name="sApellido" class="form-control <?php echo (!empty($sApellido_err)) ? 'Invalido' : ''; ?>"><?php echo $sApellido; ?></textarea>
+                            <span class="Invalido"><?php echo $sApellido_err;?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Celular</label>
                             <input type="text" name="celular" class="form-control <?php echo (!empty($celular_err)) ? 'Invalido' : ''; ?>" value="<?php echo $celular; ?>">
                             <span class="Invalido"><?php echo $celular_err;?></span>
                         </div>
