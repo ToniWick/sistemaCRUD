@@ -1,0 +1,102 @@
+@import "compass/css3";
+
+:root{
+    --fondo-obscuro: #5A8C83;
+    
+    --color-claro: #CCD9D7;
+    --color-medio: #80A6A2;
+    --tipo-blanco: #DCE6F2;
+    --color-obscuro: #36594F;
+}
+
+*{
+     box-sizing: border-box;
+}
+
+body{
+    background-color: var(--color-claro);
+}
+
+h1{
+    text-align: center;
+    font-style: italic;
+    margin-top: 1em;
+}
+
+.inputs{
+    width: 100%;
+    background-color: var(--color-claro);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 18px;
+    border: 2px solid #DCE6F2;
+    font-family: "calibri";
+    font-size: 15px;
+}
+
+#cont1{
+    width: 70%;
+    background-color: var(--fondo-obscuro);
+    margin: 1em;
+    border-radius: 7px;
+    padding: 10px;
+    float: left;
+    color: azure;
+    box-shadow: 7px 13px 37px #000;
+}
+#cont2{
+    width: 100%;
+    background-color: var(--fondo-obscuro);
+    margin: 1em;
+    border-radius: 7px;
+    padding: 10px;
+    float: right;
+    color: azure;
+    box-shadow: 7px 13px 37px #000;
+}
+#cont3{
+  width: 60%;
+  background-color: var(--fondo-obscuro);
+  margin: 1em;
+  border-radius: 7px;
+  padding: 20px;
+  box-shadow: 7px 13px 37px #000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+fieldset{
+    /*
+    background-color:
+    colo:
+    */
+    border-color: #ffffff;
+    border: 16px (interna value);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 18;
+    font-style: italic;
+}
+#borr{
+    width: 40%;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: aliceblue;
+    background: #1A3140;
+    border-radius: 4px;
+    margin: 5px;
+    padding: 10px;
+}
+#reg{
+    width: 54%;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    background: #d0ebeb;
+    border-radius: 4px;
+    margin: 5px;
+    padding: 10px;
+    float: right;
+}

@@ -59,12 +59,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $celular = $input_celular;
     }
+    #Nacimiento
+    $input_nacimiento = trim($_POST["nacimiento"]);
+    if(empty($input_nacimiento)){
+        $nacimiento = $input_nacimiento;
+    } else{
+        $nacimiento = $input_nacimiento;
+    }
     
     if(empty($username_err) && empty($correo_err) && empty($celular_err) && empty($nombre_err) && empty($pApellido_err) && empty($sApellido_err)){
-        $sql = "INSERT INTO cliente (username, correo, celular, nombre, pApellido, sApellido) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO cliente (username, correo, celular, nombre, pApellido, sApellido, nacimiento) VALUES (?, ?, ?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "ssssss", $param_username, $param_correo, $param_celular, $param_nombre, $param_pApellido, $param_sApellido);
+            mysqli_stmt_bind_param($stmt, "sssssss", $param_username, $param_correo, $param_celular, $param_nombre, $param_pApellido, $param_sApellido, $param_nacimiento);
             
             $param_username = $username;
             $param_correo = $correo;
@@ -72,6 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_nombre = $nombre;
             $param_pApellido = $pApellido;
             $param_sApellido = $sApellido;
+            $param_nacimiento = $nacimiento;
             
             if(mysqli_stmt_execute($stmt)){
                 header("location: index.php");
@@ -92,8 +100,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ingresar empleado</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Ingresar cliente</title>
+    <link rel="stylesheet" href="Estilo_1.css">
     <style>
         .wrapper{
             width: 600px;
@@ -103,44 +111,48 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
     <div class="wrapper">
-        <div class="container-fluid">
+        <div id="cont1">
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="mt-5">Agregar Cliente</h2>
                     <p>Ingresa los siquientes datos para agregar a tu cliente</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
-                            <label>Usuario</label>
-                            <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'Invalido' : ''; ?>" value="<?php echo $username; ?>">
+                            <input type="text" name="username" placeholder="Usuario" class="inputs <?php echo (!empty($username_err)) ? 'Invalido' : ''; ?>" value="<?php echo $username; ?>">
                             <span class="Invalido"><?php echo $username_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Correo electrónico</label>
-                            <textarea name="correo" class="form-control <?php echo (!empty($correo_err)) ? 'Invalido' : ''; ?>"><?php echo $correo; ?></textarea>
+                        
+                            <textarea name="correo" placeholder="Correo electrónico" class="inputs <?php echo (!empty($correo_err)) ? 'Invalido' : ''; ?>"><?php echo $correo; ?></textarea>
                             <span class="Invalido"><?php echo $correo_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Celular</label>
-                            <input type="text" name="celular" class="form-control <?php echo (!empty($celular_err)) ? 'Invalido' : ''; ?>" value="<?php echo $celular; ?>">
+                        
+                            <input type="text" name="celular" placeholder="Celular" class="inputs <?php echo (!empty($celular_err)) ? 'Invalido' : ''; ?>" value="<?php echo $celular; ?>">
                             <span class="Invalido"><?php echo $celular_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text" name="nombre" class="form-control <?php echo (!empty($nombre_err)) ? 'Invalido' : ''; ?>" value="<?php echo $nombre; ?>">
+                        
+                            <input type="text" name="nombre" placeholder="Nombre" class="inputs <?php echo (!empty($nombre_err)) ? 'Invalido' : ''; ?>" value="<?php echo $nombre; ?>">
                             <span class="Invalido"><?php echo $nombre_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Primer Apellido</label>
-                            <input type="text" name="pApellido" class="form-control <?php echo (!empty($pApellido_err)) ? 'Invalido' : ''; ?>" value="<?php echo $pApellido; ?>">
+                        
+                            <input type="text" name="pApellido" placeholder="Primer Apellido" class="inputs <?php echo (!empty($pApellido_err)) ? 'Invalido' : ''; ?>" value="<?php echo $pApellido; ?>">
                             <span class="Invalido"><?php echo $pApellido_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Segundo Apellido</label>
-                            <input type="text" name="sApellido" class="form-control <?php echo (!empty($sApellido_err)) ? 'Invalido' : ''; ?>" value="<?php echo $sApellido; ?>">
+                        
+                            <input type="text" name="sApellido" placeholder="Segundo Apellido" class="inputs <?php echo (!empty($sApellido_err)) ? 'Invalido' : ''; ?>" value="<?php echo $sApellido; ?>">
                             <span class="Invalido"><?php echo $sApellido_err;?></span>
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="index.php" class="btn btn-secondary ml-2">Cancelar</a>
+                        <div class="form-group">
+                            <label>Nacimiento</label>
+                            <input type="date" name="nacimiento" class="inputs <?php echo (!empty($nacimiento_err)) ? 'Invalido' : ''; ?>" value="<?php echo $nacimiento; ?>">
+                            <span class="Invalido"><?php echo $nacimiento_err;?></span>
+                        </div>
+                        <input type="submit" id="reg" value="Submit">
+                        <a href="index.php" id="borr">Cancelar</a>
                     </form>
                 </div>
             </div>        

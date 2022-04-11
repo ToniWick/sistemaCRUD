@@ -46,7 +46,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 <head>
     <meta charset="UTF-8">
     <title>Ver información</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Estilo_1.css">
     <style>
         .wrapper{
             width: 600px;
@@ -56,7 +56,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 </head>
 <body>
     <div class="wrapper">
-        <div class="container-fluid">
+        <div id="cont1">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">Ver información</h1>

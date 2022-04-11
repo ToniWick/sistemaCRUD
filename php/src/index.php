@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="Estilo_1.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -26,13 +26,16 @@
 <body>
     <div class="wrapper">
         <div class="container-fluid">
-            <div class="row">
+            <div id="cont3">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">Empleados</h2>
+                        <h2 class="pull-left">Clientes</h2></br>
+                        </br>
                         <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Agregar</a>
                     </div>
                     <?php
+                    #https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css
+                    #https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
                     require_once "config.php";
                     
                     $sql = "SELECT * FROM cliente";
