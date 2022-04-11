@@ -1,46 +1,46 @@
 <?php
 require_once "config.php";
  
-$name = $address = $salary = "";
-$name_err = $address_err = $salary_err = "";
+$username = $correo = $celular = "";
+$username_err = $correo_err = $celular_err = "";
  
 if(isset($_POST["id"]) && !empty($_POST["id"])){
     $id = $_POST["id"];
     
-    $input_name = trim($_POST["name"]);
-    if(empty($input_name)){
-        $name_err = "Ingresa un nombre valido";
-    } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-        $name_err = "Ingresa un nombre valido";
+    $input_username = trim($_POST["username"]);
+    if(empty($input_username)){
+        $username_err = "Ingresa un nombre valido";
+    } elseif(!filter_var($input_username, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        $username_err = "Ingresa un nombre valido";
     } else{
-        $name = $input_name;
+        $username = $input_username;
     }
     
-    $input_address = trim($_POST["address"]);
-    if(empty($input_address)){
-        $address_err = "Ingresa un correo valido";     
+    $input_correo = trim($_POST["correo"]);
+    if(empty($input_correo)){
+        $correo_err = "Ingresa un correo valido";     
     } else{
-        $address = $input_address;
+        $correo = $input_correo;
     }
     
-    $input_salary = trim($_POST["salary"]);
-    if(empty($input_salary)){
-        $salary_err = "Ingresa un salario valido";     
-    } elseif(!ctype_digit($input_salary)){
-        $salary_err = "Ingresa un salario valido";
+    $input_celular = trim($_POST["celular"]);
+    if(empty($input_celular)){
+        $celular_err = "Ingresa un salario valido";     
+    } elseif(!ctype_digit($input_celular)){
+        $celular_err = "Ingresa un salario valido";
     } else{
-        $salary = $input_salary;
+        $celular = $input_celular;
     }
     
-    if(empty($name_err) && empty($address_err) && empty($salary_err)){
-        $sql = "UPDATE cliente SET name=?, address=?, salary=? WHERE id=?";
+    if(empty($username_err) && empty($correo_err) && empty($celular_err)){
+        $sql = "UPDATE cliente SET username=?, correo=?, celular=? WHERE id=?";
          
         if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "sssi", $param_name, $param_address, $param_salary, $param_id);
+            mysqli_stmt_bind_param($stmt, "sssi", $param_username, $param_correo, $param_celular, $param_id);
             
-            $param_name = $name;
-            $param_address = $address;
-            $param_salary = $salary;
+            $param_username = $username;
+            $param_correo = $correo;
+            $param_celular = $celular;
             $param_id = $id;
             
             if(mysqli_stmt_execute($stmt)){
@@ -72,9 +72,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     
-                    $name = $row["name"];
-                    $address = $row["address"];
-                    $salary = $row["salary"];
+                    $username = $row["username"];
+                    $correo = $row["correo"];
+                    $celular = $row["celular"];
                 } else{
                     header("location: error.php");
                     exit();
@@ -118,18 +118,18 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'Invalido' : ''; ?>" value="<?php echo $name; ?>">
-                            <span class="Invalido"><?php echo $name_err;?></span>
+                            <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'Invalido' : ''; ?>" value="<?php echo $username; ?>">
+                            <span class="Invalido"><?php echo $username_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Correo</label>
-                            <textarea name="address" class="form-control <?php echo (!empty($address_err)) ? 'Invalido' : ''; ?>"><?php echo $address; ?></textarea>
-                            <span class="Invalido"><?php echo $address_err;?></span>
+                            <textarea name="correo" class="form-control <?php echo (!empty($correo_err)) ? 'Invalido' : ''; ?>"><?php echo $correo; ?></textarea>
+                            <span class="Invalido"><?php echo $correo_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Salario</label>
-                            <input type="text" name="salary" class="form-control <?php echo (!empty($salary_err)) ? 'Invalido' : ''; ?>" value="<?php echo $salary; ?>">
-                            <span class="Invalido"><?php echo $salary_err;?></span>
+                            <input type="text" name="celular" class="form-control <?php echo (!empty($celular_err)) ? 'Invalido' : ''; ?>" value="<?php echo $celular; ?>">
+                            <span class="Invalido"><?php echo $celular_err;?></span>
                         </div>
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Submit">

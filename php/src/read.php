@@ -16,9 +16,9 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
  
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 
-                $name = $row["name"];
-                $address = $row["address"];
-                $salary = $row["salary"];
+                $username = $row["username"];
+                $correo = $row["correo"];
+                $celular = $row["celular"];
             } else{
                 header("location: error.php");
                 exit();
@@ -59,15 +59,15 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                     <h1 class="mt-5 mb-3">Ver información</h1>
                     <div class="form-group">
                         <label>Nombre</label>
-                        <p><b><?php echo $row["name"]; ?></b></p>
+                        <p><b><?php echo $row["username"]; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>Correo</label>
-                        <p><b><?php echo $row["address"]; ?></b></p>
+                        <p><b><?php echo $row["correo"]; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>Salario</label>
-                        <p><b><?php echo $row["salary"]; ?></b></p>
+                        <p><b><?php echo $row["celular"]; ?></b></p>
                     </div>
                     <p><a href="index.php" class="btn btn-primary">Regresar</a></p>
                 </div>

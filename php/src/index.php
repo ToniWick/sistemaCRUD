@@ -42,9 +42,9 @@
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th>#</th>";
-                                        echo "<th>Nombre</th>";
+                                        echo "<th>Usuario</th>";
                                         echo "<th>Correo</th>";
-                                        echo "<th>Salario</th>";
+                                        echo "<th>Celular</th>";
                                         echo "<th>Acciones</th>";
                                     echo "</tr>";
                                 echo "</thead>";
@@ -52,9 +52,9 @@
                                 while($row = mysqli_fetch_array($result)){
                                     echo "<tr>";
                                         echo "<td>" . $row['id'] . "</td>";
-                                        echo "<td>" . $row['name'] . "</td>";
-                                        echo "<td>" . $row['address'] . "</td>";
-                                        echo "<td>" . $row['salary'] . "</td>";
+                                        echo "<td>" . $row['username'] . "</td>";
+                                        echo "<td>" . $row['correo'] . "</td>";
+                                        echo "<td>" . $row['celular'] . "</td>";
                                         echo "<td>";
                                             echo '<a href="read.php?id='. $row['id'] .'" class="mr-3" title="Ver información" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                             echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Actualizar información" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
